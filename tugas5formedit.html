@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Form</title>
+  </head>
+  <body>
+    <form action="">
+      <table
+        border="1"
+        style="background-color: grey; margin-left: auto; margin-right: auto"
+        cellpadding="20"
+      >
+        <tr>
+          <td
+            id="list-data"
+            style="
+              padding: 0;
+              text-align: center;
+              font-family: 'Courier New', Courier, monospace;
+            "
+          >
+            <h2>Fill this form, Please!</h2>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <table
+              style="background-color: rgb(21, 114, 114)"
+              width="100%"
+              cellspacing="10"
+              cellpadding="20"
+            >
+              <tr>
+                <td><label for="name">Name</label></td>
+                <td>:</td>
+                <td>
+                  <input
+                    style="width: 400px"
+                    type="text"
+                    id="name"
+                    name="name"
+                  /><br />
+                </td>
+              </tr>
+              <tr>
+                <td><label for="address">Address</label></td>
+                <td>:</td>
+                <td>
+                  <input
+                    style="width: 400px; height: 50px"
+                    type="address"
+                    id="address"
+                  /><br />
+                </td>
+              </tr>
+              <tr>
+                <td><label for="gender">Gender</label></td>
+                <td>:</td>
+                <td id="gender-container">
+                  <input type="radio" id="male" name="gender" value="Male" />
+                  <label for="male">Male</label>
+                  <input
+                    type="radio"
+                    id="female"
+                    name="gender"
+                    value="Female"
+                  />
+                  <label for="female">Female</label>
+                </td>
+              </tr>
+              <tr>
+                <td style="width: 100px"><label>Hobby</label></td>
+                <td>:</td>
+                <td style="width: 600px; margin: 20px" id="hobby-container">
+                  <input
+                    type="checkbox"
+                    name="cbx"
+                    id="Reading"
+                    value="Reading"
+                  /><label style="margin-right: 20px">Reading</label>
+                  <input
+                    type="checkbox"
+                    name="cbx"
+                    id="Reading"
+                    value="Running"
+                  /><label style="margin-right: 20px">Running</label>
+                  <input
+                    type="checkbox"
+                    name="cbx"
+                    id="Reading"
+                    value="Swimming"
+                  /><label style="margin-right: 20px">Swimming</label>
+                  <input
+                    type="checkbox"
+                    name="cbx"
+                    id="Reading"
+                    value="Singing"
+                  /><label style="margin-right: 20px">Singing</label>
+                  <input
+                    type="checkbox"
+                    name="cbx"
+                    id="Reading"
+                    value="Others"
+                  />Others
+                </td>
+              </tr>
+              <tr>
+                <td><label>Religion</label></td>
+                <td>:</td>
+                <td>
+                  <select style="padding: 4px" name="religion" id="religion">
+                    <option value="Islam">Islam</option>
+                    <option value="Protestan">Protestan</option>
+                    <option value="Hindu">Hindu</option>
+                    <option value="Budha">Budha</option>
+                    <option value="Katolik">Katolik</option>
+                  </select>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="4">
+                  <input id="submit"
+                  style="
+                    width: 300px;
+                    height: 40px;
+                    background-color: rgb(100, 167, 161);
+                    margin-left: 270px;
+                    border: none;
+                  "
+                  type="submit"
+                  value="Submit"
+                />
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </form>
+  <form action="">
+    <table
+      border="0"
+      cellpadding="20px"
+      style="
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 80px;
+        background-color: rgb(100, 167, 161);
+      "
+    >
+      <tr>
+        <td><label for="searchfor">Search Data</label></td>
+        <td>
+          <input
+            style="padding: 10px"
+            type="
+            search"
+            id="searchfor"
+            name="searchfor"
+            placeholder="Search by name or address"
+          />
+        </td>
+        <td><input style="padding: 10px" type="button" value="Search" /></td>
+      </tr>
+    </table>
+  </form>
+
+  <table
+    style="
+      margin-top: 50px;
+      margin-left: auto;
+      margin-right: auto;
+      background-color: rgb(21, 114, 114);
+      text-align: center;
+    "
+    border="1"
+    cellpadding="20px"
+    cellspacing="0px"
+    width="900px"
+    id="data-table"
+  >
+    <tr>
+      <td width="10px">No</td>
+      <td>Name</td>
+      <td>Address</td>
+      <td>Gender</td>
+      <td>Hobby</td>
+      <td>Religion</td>
+      <td>Edit</td>
+      <td>Delete</td>
+    </tr>
+  </table>
+  <script>
+    var nameDOM = document.querySelector("#name");
+    var address = document.querySelector("#address");
+    var genderContainer = document.querySelector("#gender-container");
+    var submitBtn = document.querySelector("#submit");
+    var hobbyContainer = document.querySelector("#hobby-container");
+    var table = document.querySelector("#data-table");
+    var religion = document.querySelector("#religion");
+    var tableDataDB = [];
+    var currentIndex = 0;
+
+    submitBtn.addEventListener("click", function (event) {
+      event.preventDefault();
+      var newName = nameDOM.value;
+      var newAddress = address.value;
+      var newGender = "";
+      var newHobby = [];
+      var newReligion = "";
+      console.log(religion);
+      console.log(newGender, newAddress, newName);
+      for (input of genderContainer.querySelectorAll("input")) {
+        if (input.checked == true) {
+          newGender = input.value;
+        }
+      }
+      for (input of hobbyContainer.querySelectorAll("input")) {
+        if (input.checked == true) {
+          console.log(input.value);
+          newHobby.push(input.value);
+        }
+      }
+      tableDataDB.push({
+        name: newName,
+        address: newAddress,
+        gender: newGender,
+        hobby: newHobby.join(","),
+        religion: religion.value,
+        id: currentIndex,
+      });
+      currentIndex += 1;
+      refreshTableData(tableDataDB);
+    });
+
+    function refreshTableData(data) {
+      let dom = "";
+      data.forEach((element, index) => {
+        dom += `
+        <tr>
+          <td width="10px">${index + 1}</td>
+          <td>${element.name}</td>
+          <td>${element .address}</td>
+            <td>${element.gender}</td>
+            <td>${element.hobby}</td>
+            <td>${element.religion}</td>
+            <td><button onclick="editData(${element.id})">Edit</button></td>
+            <td><button onclick="deleteData(${element.id})">Delete</button></td>
+          </tr>
+          `;
+        });
+        table.innerHTML =
+          `<tr>
+            <td width="10px">No</td>
+            <td>Name</td>
+            <td>Address</td>
+            <td>Gender</td>
+            <td>Hobby</td>
+            <td>Religion</td>
+            <td>Edit</td>
+            <td>Delete</td>
+          </tr>` + dom;
+      }
+      var filterInput = document.querySelector("input#searchfor");
+      // filter data dari kotak input
+      filterInput.addEventListener("input", function () {
+        console.log(tableDataDB);
+        let filtered = tableDataDB.filter(function (datum) {
+          return (
+            datum.name
+              .toLocaleLowerCase()
+
+              .includes(filterInput.value.toLocaleLowerCase()) ||
+            datum.address
+              .toLocaleLowerCase()
+              .includes(filterInput.value.toLocaleLowerCase())
+          );
+        });
+        refreshTableData(filtered);
+      });
+
+      // delete data dengan ID
+      function deleteData(id) {
+        tableDataDB = tableDataDB.filter((data) => data.id != id);
+        refreshTableData(tableDataDB);
+      }
+
+      // edit data dengan id, memakai prompt
+      function editData(id) {
+        var data = tableDataDB.filter((data) => data.id == id);
+        var newName = prompt("masukkan nama", data.name);
+        var newAddress = prompt("masukkan alamat", data.address);
+        var newGender = prompt("masukan gender", data.gender);
+        var newHobby = prompt("masukkan hobi", data.hobby);
+        var newReligion = prompt("masukkan agama", data.religion);
+        tableDataDB = tableDataDB.map((data) => {
+          if (data.id == id) {
+            return {
+              name: newName || data.name,
+              address: newAddress || data.address,
+              gender: newGender || data.gender,
+              hobby: newHobby || data.hobby,
+              religion: newReligion || data.religion,
+              id: id,
+            };
+          }
+          return data;
+        });
+        refreshTableData(tableDataDB);
+      }
+    </script>
+  </body>
+</html>
